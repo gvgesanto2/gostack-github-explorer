@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Title } from './home.styles';
+
 const Home: React.FC = () => {
-  return <h1>Homepage</h1>;
+  return <Title>Homepage</Title>;
 };
 
 export default Home;
