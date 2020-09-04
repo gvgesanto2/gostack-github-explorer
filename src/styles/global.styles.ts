@@ -49,4 +49,40 @@ export default createGlobalStyle`
   ul {
     list-style: none;
   }
+
+  /* Utilities classes */
+
+  /* Margin bottom */
+  .mb-xm {
+    margin-bottom: 2rem;
+  }
+  .mb-sm {
+    margin-bottom: 3rem;
+  }
+  .mb-md {
+    margin-bottom: 4rem;
+  }
+  .mb-lg {
+    margin-bottom: 6rem;
+  }
+  .mb-xlg {
+    margin-bottom: 8rem;
+  }
+
+  /* Margin top */
+  .mt-xm {
+    margin-bottom: 2rem;
+  }
+  .mt-sm {
+    margin-bottom: 3rem;
+  }
+  .mt-md {
+    margin-bottom: 4rem;
+  }
+  .mt-lg {
+    margin-bottom: 6rem;
+  }
+  .mt-xlg {
+    margin-bottom: 8rem;
+  }
 `;
