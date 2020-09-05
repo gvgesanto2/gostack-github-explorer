@@ -52,7 +52,30 @@ export default createGlobalStyle`
 
   /* Utilities classes */
 
+  /* Vertical Margins */
+  .m-xxm {
+    margin: 1rem 0;
+  }
+  .m-xm {
+    margin: 2rem 0;
+  }
+  .m-sm {
+    margin: 3rem 0;
+  }
+  .m-md {
+    margin: 4rem 0;
+  }
+  .m-lg {
+    margin: 6rem 0;
+  }
+  .m-xlg {
+    margin: 8rem 0;
+  }
+
   /* Margin bottom */
+  .mb-xxm {
+    margin-bottom: 1rem;
+  }
   .mb-xm {
     margin-bottom: 2rem;
   }
@@ -70,19 +93,22 @@ export default createGlobalStyle`
   }
 
   /* Margin top */
+  .mt-xxm {
+    margin-top: 1rem;
+  }
   .mt-xm {
-    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
   .mt-sm {
-    margin-bottom: 3rem;
+    margin-top: 3rem;
   }
   .mt-md {
-    margin-bottom: 4rem;
+    margin-top: 4rem;
   }
   .mt-lg {
-    margin-bottom: 6rem;
+    margin-top: 6rem;
   }
   .mt-xlg {
-    margin-bottom: 8rem;
+    margin-top: 8rem;
   }
 `;

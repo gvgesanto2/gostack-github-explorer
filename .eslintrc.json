@@ -29,8 +29,11 @@
     "prettier"
   ],
   "rules": {
+    "camelcase": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
     "prettier/prettier": "error",
     "react/jsx-filename-extension": [
       1,

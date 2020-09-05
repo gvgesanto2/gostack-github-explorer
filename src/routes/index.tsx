@@ -6,7 +6,7 @@ import RepositoryDetails from '../views/pages/repository-details/repository-deta
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/repo">
+    <Route path="/repositories/:fullName+">
       <RepositoryDetails />
     </Route>
     <Route path="/" exact>
