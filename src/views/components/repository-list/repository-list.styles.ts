@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const RepositoryListContainer = styled.div`
-  max-width: 71.5rem;
+  width: 100%;
 
   & > *:not(:last-child) {
     margin-bottom: 1.6rem;

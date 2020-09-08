@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
 import { Title, Error } from './home.styles';
-import logoImg from '../../../assets/images/logo.svg';
 
 import api from '../../../services/api';
 import SearchBar from '../../components/search-bar/search-bar.component';
 import RepositoryList from '../../components/repository-list/repository-list.component';
+import Header from '../../components/header/header.component';
 
 interface Repository {
   id: number;
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <img src={logoImg} alt="Github Explorer" className="mb-xlg" />
+      <Header />
       <Title className="mb-md">Explore repositories in Github</Title>
 
       <SearchBar submitCallback={handleAddRepository} hasError={!!inputError} />

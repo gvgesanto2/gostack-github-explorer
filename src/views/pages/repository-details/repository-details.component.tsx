@@ -1,14 +1,16 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { FiChevronLeft } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 
 import {
-  Header,
   RepositoryInfo,
   RepositoryInfoHeader,
   RepositoryInfoList,
+  IssueList,
+  Issue,
 } from './repository-details.styles';
-import logoImg from '../../../assets/images/logo.svg';
+
+import Header from '../../components/header/header.component';
 
 interface RepositoryDetailsParams {
   fullName: string;
@@ -19,24 +21,18 @@ const RepositoryDetails: React.FC = () => {
 
   return (
     <>
-      <Header>
-        <img src={logoImg} alt="Github Explorer" />
-        <nav>
-          <Link to="/">
-            <FiChevronLeft size={16} />
-            Voltar
-          </Link>
-        </nav>
-      </Header>
-      <RepositoryInfo>
+      <Header />
+      <RepositoryInfo className="mb-xlg">
         <RepositoryInfoHeader>
           <img
             src="https://avatars3.githubusercontent.com/u/64566209?s=460&u=5af45d6849ec9b1427eff85b29723c9358f1645e&v=4"
             alt="Me"
           />
           <div>
-            <strong>gvgesanto/githubExplorer</strong>
-            <p>Description</p>
+            <a href="#">
+              <strong>gvgesanto/githubExplorer</strong>
+              <p>Description</p>
+            </a>
           </div>
         </RepositoryInfoHeader>
         <RepositoryInfoList>
@@ -50,10 +46,34 @@ const RepositoryDetails: React.FC = () => {
           </li>
           <li>
             <strong>67</strong>
-            <span>Issues</span>
+            <span>Opened issues</span>
           </li>
         </RepositoryInfoList>
       </RepositoryInfo>
+
+      <IssueList>
+        <Issue>
+          <Link to="/repositories/">
+            <div>
+              <strong>title</strong>
+              <p>description</p>
+            </div>
+
+            <FiChevronRight size={20} />
+          </Link>
+        </Issue>
+
+        <Issue>
+          <Link to="/repositories/">
+            <div>
+              <strong>title</strong>
+              <p>description</p>
+            </div>
+
+            <FiChevronRight size={20} />
+          </Link>
+        </Issue>
+      </IssueList>
     </>
   );
 };

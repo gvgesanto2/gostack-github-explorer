@@ -38,6 +38,7 @@ export default createGlobalStyle`
   }
 
   button {
+    border: 0;
     cursor: pointer;
   }
 
