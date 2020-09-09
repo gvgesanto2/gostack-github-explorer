@@ -18,49 +18,9 @@ const MyRepositories: React.FC = () => {
   return (
     <>
       <Header />
-      <Title className="mb-md">My Collections</Title>
+      <Title className="mb-md">My Repositories</Title>
 
-      <SearchBar submitCallback={handleSubmit} className="mb-xlg" />
-
-      <RepoListsPreview>
-        <div className="horizontalChevron chevronLeft">
-          <FiChevronLeft size={20} />
-        </div>
-        <RepoLists>
-          <li className="addListItem">
-            <FiPlus />
-          </li>
-          <RepoListsItem>
-            <img
-              src="https://avatars3.githubusercontent.com/u/69590972?s=200&v=4"
-              alt="img"
-            />
-            <h3>All my repositories</h3>
-            <span>Created at 06/09/2019</span>
-          </RepoListsItem>
-
-          <RepoListsItem>
-            <img
-              src="https://avatars3.githubusercontent.com/u/69590972?s=200&v=4"
-              alt="img"
-            />
-            <h3>All my repositories</h3>
-            <span>Created at 06/09/2019</span>
-          </RepoListsItem>
-
-          <RepoListsItem>
-            <img
-              src="https://avatars3.githubusercontent.com/u/69590972?s=200&v=4"
-              alt="img"
-            />
-            <h3>All my repositories</h3>
-            <span>Created at 06/09/2019</span>
-          </RepoListsItem>
-        </RepoLists>
-        <div className="horizontalChevron chevronRight">
-          <FiChevronRight size={20} />
-        </div>
-      </RepoListsPreview>
+      {/* <SearchBar submitCallback={handleSubmit} className="mb-xlg" /> */}
     </>
   );
 };

@@ -1,82 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Dispatch } from 'redux';
+import { connect, ConnectedProps } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { Title, Error } from './home.styles';
 
-import api from '../../../services/api';
 import SearchBar from '../../components/search-bar/search-bar.component';
 import RepositoryList from '../../components/repository-list/repository-list.component';
-import Header from '../../components/header/header.component';
+import {
+  selectExplorerErrorMessage,
+  selectTmpRepositories,
+} from '../../../redux/ducks/explorer/explorer.selectors';
+import { RootState } from '../../../redux/root/root.types';
+import { fetchRepositoryStart } from '../../../redux/ducks/explorer/explorer.actions';
+import { Repository } from '../../../redux/ducks/explorer/explorer.types';
 
-interface Repository {
-  id: number;
-  full_name: string;
-  description: string;
-  owner: {
-    login: string;
-    avatar_url: string;
-  };
+interface StateProps {
+  inputError?: string | null;
+  repositories: Repository[];
 }
 
-function inRepositories(
-  repositories: Repository[],
-  { id }: Repository,
-): boolean {
-  const reposIds = repositories.map(repo => repo.id);
+const mapStateToProps = createStructuredSelector<RootState, StateProps>({
+  inputError: state => selectExplorerErrorMessage(state),
+  repositories: state => selectTmpRepositories(state),
+});
 
-  return reposIds.includes(id);
-}
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  fetchRepository: (repoFullName: string) =>
+    dispatch(fetchRepositoryStart(repoFullName)),
+});
 
-const Home: React.FC = () => {
-  const [inputError, setInputError] = useState('');
-  const [repositories, setRepositories] = useState<Repository[]>(() => {
-    const localStoragedRepos = localStorage.getItem(
-      '@githubExplorer:repositories',
-    );
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
-    return localStoragedRepos ? JSON.parse(localStoragedRepos) : [];
-  });
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
-  useEffect(() => {
-    localStorage.setItem(
-      '@githubExplorer:repositories',
-      JSON.stringify(repositories),
-    );
-  }, [repositories]);
+type ExplorerProps = PropsFromRedux;
 
-  async function handleAddRepository(repoFullName: string): Promise<void> {
-    if (!repoFullName.includes('/')) {
-      setInputError('Enter the repository in this format: "author/name".');
-      return;
-    }
-
-    try {
-      const response = await api.get<Repository>(`repos/${repoFullName}`);
-
-      const repository = response.data;
-
-      if (inRepositories(repositories, repository)) {
-        setInputError('Repository already added.');
-      } else {
-        setRepositories([...repositories, repository]);
-        setInputError('');
-      }
-    } catch (error) {
-      const { status } = error.response ? error.response : null;
-
-      if (status === 404) {
-        setInputError('Repository not found.');
-      } else {
-        setInputError('Error searching for this repository.');
-      }
-    }
-  }
-
+const ExplorerPage: React.FC<ExplorerProps> = ({
+  inputError,
+  repositories,
+  fetchRepository,
+}) => {
   return (
     <>
-      <Header />
       <Title className="mb-md">Explore repositories in Github</Title>
 
-      <SearchBar submitCallback={handleAddRepository} hasError={!!inputError} />
+      <SearchBar
+        submitCallback={fetchRepository}
+        hasError={!!inputError}
+        placeholder="Enter a repository..."
+      />
       {inputError && <Error className="mt-xxm">{inputError}</Error>}
 
       <RepositoryList
@@ -88,4 +61,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default connector(ExplorerPage);

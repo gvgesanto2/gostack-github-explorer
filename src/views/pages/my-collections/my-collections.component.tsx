@@ -16,7 +16,7 @@ const MyCollections: React.FC = () => {
       <Header />
       <Title className="mb-md">My Collections</Title>
 
-      <SearchBar submitCallback={handleSubmit} className="mb-xlg" />
+      {/* <SearchBar submitCallback={handleSubmit} className="mb-xlg" /> */}
 
       <CollectionsDisplay />
     </>

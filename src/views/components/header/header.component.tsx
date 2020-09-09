@@ -8,19 +8,24 @@ import logoImg from '../../../assets/images/logo.svg';
 const Header: React.FC = () => {
   return (
     <HeaderContainer className="mb-xlg">
-      <img src={logoImg} alt="Github Explorer" />
+      <Link to="/">
+        <img src={logoImg} alt="Github Explorer" />
+      </Link>
       <nav>
         <Link to="/">
           <FiChevronLeft size={16} />
           <span>BACK</span>
         </Link>
-        <Link to="/">
-          <span>ALL MY REPOSITORIES</span>
+        <Link to="/collections">
+          <span>MY COLLECTIONS</span>
+        </Link>
+        <Link to="/my">
+          <span>MY REPOSITORIES</span>
         </Link>
         <Link to="/">
           <span>FAVORITES</span>
         </Link>
-        <Link to="/">
+        <Link to="/signin">
           <span>SIGN IN</span>
         </Link>
       </nav>

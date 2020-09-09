@@ -3,23 +3,27 @@ import React, { useState } from 'react';
 import { SearchBarForm } from './search-bar.styles';
 
 type SearchBarProps = {
-  submitCallback: (repoFullName: string) => void;
+  submitCallback: (searchInput: string) => void;
+  placeholder: string;
   hasError?: boolean;
+  searchButtonText?: string;
   className?: string;
 };
 
 const SearchBar: React.FC<SearchBarProps> = ({
   submitCallback,
+  placeholder,
   className = '',
   hasError = false,
+  searchButtonText = 'Search',
 }) => {
-  const [repoToAdd, setRepoToAdd] = useState('');
+  const [searchInput, setSearchInput] = useState('');
 
   function handleSubmit(ev: React.FormEvent<HTMLFormElement>): void {
     ev.preventDefault();
 
-    submitCallback(repoToAdd);
-    setRepoToAdd('');
+    submitCallback(searchInput);
+    setSearchInput('');
   }
 
   return (
@@ -30,11 +34,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     >
       <input
         type="text"
-        value={repoToAdd}
-        onChange={ev => setRepoToAdd(ev.target.value)}
-        placeholder="Enter the repository..."
+        value={searchInput}
+        onChange={ev => setSearchInput(ev.target.value)}
+        placeholder={placeholder}
       />
-      <button type="submit">Search</button>
+      <button type="submit">{searchButtonText}</button>
     </SearchBarForm>
   );
 };
