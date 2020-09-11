@@ -6,28 +6,23 @@ import { HeaderContainer } from './header.styles';
 import logoImg from '../../../assets/images/logo.svg';
 
 const Header: React.FC = () => {
+  console.log('@@Header/rendered');
   return (
-    <HeaderContainer className="mb-xlg">
+    <HeaderContainer>
       <Link to="/">
         <img src={logoImg} alt="Github Explorer" />
       </Link>
       <nav>
-        <Link to="/">
-          <FiChevronLeft size={16} />
-          <span>BACK</span>
-        </Link>
-        <Link to="/collections">
-          <span>MY COLLECTIONS</span>
-        </Link>
-        <Link to="/my">
-          <span>MY REPOSITORIES</span>
-        </Link>
-        <Link to="/">
-          <span>FAVORITES</span>
-        </Link>
-        <Link to="/signin">
-          <span>SIGN IN</span>
-        </Link>
+        <div>
+          <Link to="/">
+            <FiChevronLeft size={16} />
+            BACK
+          </Link>
+        </div>
+
+        <div>
+          <Link to="/signin">SIGN IN</Link>
+        </div>
       </nav>
     </HeaderContainer>
   );

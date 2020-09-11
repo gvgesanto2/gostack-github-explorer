@@ -8,6 +8,8 @@ import { store, persistor } from './redux/store';
 
 import App from './views/App';
 
+console.log('@@INDEX - LOADED!');
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

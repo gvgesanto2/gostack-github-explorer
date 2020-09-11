@@ -55,9 +55,17 @@ export const RepositoryInfoList = styled.ul`
     }
 
     span {
-      display: block;
+      display: flex;
+      align-items: center;
+
       color: ${({ theme }) => theme.dark_grey_color_2};
       margin-top: 0.4rem;
+
+      svg {
+        width: 1.9rem;
+        height: 1.9rem;
+        margin-right: 0.5rem;
+      }
     }
   }
 `;

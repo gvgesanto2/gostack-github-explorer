@@ -7,5 +7,8 @@ export default {
   dark_grey_color_2: '#6c6c80',
   dark_grey_color_3: '#737380',
   light_grey_color_1: '#cbcbd6',
+  light_grey_color_2: '#f4f4f4',
   error_color: '#c53030',
+  header_height: 8,
+  sidebar_width: 30.6,
 };

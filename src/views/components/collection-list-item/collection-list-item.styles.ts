@@ -19,12 +19,12 @@ export const Container = styled.li`
     /* outline: 3px solid ${({ theme }) => theme.primary_color}; */
     /* box-shadow: 0 0 0.5rem ${({ theme }) => theme.primary_color}; */
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-    transform: translateY(-3px);
+    transform: translateY(-4px) scale(1.05);
   }
 
   &:active {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(1.02);
   }
 
   a {

@@ -1,12 +1,14 @@
 import { ActionCreator } from 'redux';
 
+import { Repository } from '../common/common.types';
+
 import ExplorerActionTypes, {
-  Repository,
   FetchRepositoryStartAction,
   FetchRepositorySuccessAction,
   FetchRepositoryFailureAction,
   AddRepositoryAction,
   AddRepositoryFailureAction,
+  RemoveRepositoryAction,
 } from './explorer.types';
 
 // Fetch Repository Action Creators
@@ -44,4 +46,12 @@ export const addRepositoryFailure: ActionCreator<AddRepositoryFailureAction> = (
 ) => ({
   type: ExplorerActionTypes.ADD_REPOSITORY_FAILURE,
   payload: errorMessage,
+});
+
+// Remove Repository Action Creator
+export const removeRepository: ActionCreator<RemoveRepositoryAction> = (
+  repositoryId: number,
+) => ({
+  type: ExplorerActionTypes.REMOVE_REPOSITORY,
+  payload: repositoryId,
 });

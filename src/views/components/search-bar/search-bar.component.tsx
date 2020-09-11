@@ -4,19 +4,19 @@ import { SearchBarForm } from './search-bar.styles';
 
 type SearchBarProps = {
   submitCallback: (searchInput: string) => void;
-  placeholder: string;
   hasError?: boolean;
-  searchButtonText?: string;
-  className?: string;
+  data: {
+    placeholder?: string;
+    searchButtonText?: string;
+  };
 };
 
 const SearchBar: React.FC<SearchBarProps> = ({
   submitCallback,
-  placeholder,
-  className = '',
   hasError = false,
-  searchButtonText = 'Search',
+  data: { placeholder = 'Search...', searchButtonText = 'Search' },
 }) => {
+  console.log('@@SearchBar/rendered');
   const [searchInput, setSearchInput] = useState('');
 
   function handleSubmit(ev: React.FormEvent<HTMLFormElement>): void {
@@ -26,16 +26,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setSearchInput('');
   }
 
+  function handleChange(ev: React.ChangeEvent<HTMLInputElement>): void {
+    setSearchInput(ev.target.value);
+  }
+
   return (
-    <SearchBarForm
-      onSubmit={handleSubmit}
-      hasError={hasError}
-      className={className}
-    >
+    <SearchBarForm onSubmit={handleSubmit} hasError={hasError}>
       <input
         type="text"
         value={searchInput}
-        onChange={ev => setSearchInput(ev.target.value)}
+        onChange={handleChange}
         placeholder={placeholder}
       />
       <button type="submit">{searchButtonText}</button>

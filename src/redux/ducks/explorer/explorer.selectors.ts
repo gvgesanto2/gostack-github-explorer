@@ -10,6 +10,11 @@ export const selectTmpRepositories = createSelector(
   (explorer: ExplorerState) => explorer.tmpRepositories,
 );
 
+export const selectTmpRepository = (fullName: string) =>
+  createSelector([selectTmpRepositories], repositories =>
+    repositories.find(repository => repository.full_name === fullName),
+  );
+
 export const selectIsRepositoryFetching = createSelector(
   [selectExplorer],
   (explorer: ExplorerState) => explorer.isFetching,
@@ -18,4 +23,29 @@ export const selectIsRepositoryFetching = createSelector(
 export const selectExplorerErrorMessage = createSelector(
   [selectExplorer],
   (explorer: ExplorerState) => explorer.errorMessage,
+);
+
+export const selectExplorerHasError = createSelector(
+  [selectExplorer],
+  (explorer: ExplorerState) => !!explorer.errorMessage,
+);
+
+export const selectExplorerData = createSelector(
+  [selectExplorer],
+  (explorer: ExplorerState) => explorer.explorerData,
+);
+
+export const selectExplorerTitle = createSelector(
+  [selectExplorerData],
+  explorerData => explorerData.title,
+);
+
+export const selectExplorerSearchBarData = createSelector(
+  [selectExplorerData],
+  explorerData => explorerData.searchBar,
+);
+
+export const selectExplorerRepositoryListData = createSelector(
+  [selectExplorerData],
+  explorerData => explorerData.repositoryList,
 );

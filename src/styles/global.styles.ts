@@ -16,17 +16,31 @@ export default createGlobalStyle`
   /* Defining 1rem=10px */
   html {
     font-size: 62.5%;
+
+    @media only screen and (max-width: 1600px) {
+      font-size: 60%;
+    }
+
+    @media only screen and (max-width: 1400px) {
+      font-size: 56.25%;
+    }
+
+    @media only screen and (max-width: 1100px) {
+      font-size: 50%;
+    }
   }
 
   /* Base styles */
   #root {
-    max-width: 96rem;
+    /* max-width: 96rem;
+    max-width: 144rem;
+    max-width: 102.4rem;
     padding: 4rem 2rem;
-    margin: 0 auto;
+    margin: 0 auto; */
   }
 
   body {
-    background: #f0f0f5 url(${githubBackground}) no-repeat 70% top;
+    background: #f0f0f5 url(${githubBackground}) no-repeat 80% 10%;
     -webkit-font-smoothing: antialiased;
 
     font-family:'Roboto', sans-serif;

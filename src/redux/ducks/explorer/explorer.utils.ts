@@ -2,7 +2,8 @@ import { Reducer, Action } from 'redux';
 import { persistReducer } from 'redux-persist';
 import { PersistPartial } from 'redux-persist/es/persistReducer';
 import storage from 'redux-persist/lib/storage';
-import { Repository, ExplorerState, ExplorerActions } from './explorer.types';
+import { Repository } from '../common/common.types';
+import { ExplorerState, ExplorerActions } from './explorer.types';
 
 const explorerPersistConfig = {
   key: 'explorer',
@@ -23,4 +24,11 @@ export function inRepositories(
   const reposIds = repositories.map(repo => repo.id);
 
   return reposIds.includes(id);
+}
+
+export function removeRepositoryFromList(
+  repositories: Repository[],
+  repositoryId: number,
+): Repository[] {
+  return repositories.filter(repository => repository.id !== repositoryId);
 }

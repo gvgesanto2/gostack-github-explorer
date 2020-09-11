@@ -2,38 +2,38 @@ import React from 'react';
 
 import { RepositoryListContainer } from './repository-list.styles';
 
+import { Repository } from '../../../redux/ducks/common/common.types';
+
 import RepositoryItem from '../repository-item/repository-item.component';
 
-interface Repository {
-  id: number;
-  full_name: string;
-  description: string;
-  owner: {
-    login: string;
-    avatar_url: string;
+interface RepositoryListProps {
+  handleRemoveRepository: (repositoryId: number) => void;
+  repositories: Repository[];
+  data: {
+    emptyListMsg: string;
+    baseLinkUrl: string;
   };
 }
 
-interface RepositoryListProps extends React.HTMLAttributes<HTMLDivElement> {
-  repositories: Repository[];
-  emptyListMsg?: string;
-}
-
 const RepositoryList: React.FC<RepositoryListProps> = ({
+  handleRemoveRepository,
   repositories,
-  className,
-  emptyListMsg = '',
+  data: { emptyListMsg, baseLinkUrl },
 }) => {
+  console.log('@@RepositoryList/rendered');
   return (
-    <RepositoryListContainer className={className}>
+    <RepositoryListContainer>
       {repositories.length > 0 ? (
         repositories.map(
           ({ id, full_name, description, owner: { avatar_url } }) => (
             <RepositoryItem
               key={id}
+              id={id}
               title={full_name}
               description={description}
               avatar_url={avatar_url}
+              baseLinkUrl={baseLinkUrl}
+              removeRepositoryCallback={handleRemoveRepository}
             />
           ),
         )

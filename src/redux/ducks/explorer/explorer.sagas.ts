@@ -3,14 +3,17 @@ import { AxiosResponse } from 'axios';
 
 import api from '../../../services/api';
 
+// Import common data types
+import { Repository } from '../common/common.types';
+
 import {
   fetchRepositorySuccess,
   fetchRepositoryFailure,
   addRepository,
   addRepositoryFailure,
 } from './explorer.actions';
+
 import ExplorerActionTypes, {
-  Repository,
   FetchRepositoryStartAction,
   FetchRepositorySuccessAction,
 } from './explorer.types';

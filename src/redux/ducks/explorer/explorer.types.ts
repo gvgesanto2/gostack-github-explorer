@@ -1,14 +1,23 @@
 import { Action } from 'redux';
 
+// Import common data types
+import { Repository } from '../common/common.types';
+
 // Data Types
-export interface Repository {
-  id: number;
-  full_name: string;
-  description: string;
-  owner: {
-    login: string;
-    avatar_url: string;
-  };
+export interface SearchBarData {
+  searchButtonText: string;
+  placeholder: string;
+}
+
+export interface RepositoryListData {
+  emptyListMsg: string;
+  baseLinkUrl: string;
+}
+
+export interface ExplorerData {
+  title: string;
+  searchBar: SearchBarData;
+  repositoryList: RepositoryListData;
 }
 
 // State Type
@@ -16,6 +25,7 @@ export interface ExplorerState {
   readonly tmpRepositories: Repository[];
   readonly isFetching: boolean;
   readonly errorMessage?: string | null;
+  readonly explorerData: ExplorerData;
 }
 
 // Action Types
@@ -26,13 +36,10 @@ enum ExplorerActionTypes {
   FETCH_REPOSITORY_FAILURE = '@@explorer/FETCH_REPOSITORY_FAILURE',
   ADD_REPOSITORY = '@@explorer/ADD_REPOSITORY',
   ADD_REPOSITORY_FAILURE = '@@explorer/ADD_REPOSITORY_FAILURE',
+  REMOVE_REPOSITORY = '@@explorer/REMOVE_REPOSITORY',
 }
 
 // Fetch Repository
-// export const FETCH_REPOSITORY_START = '@@explorer/FETCH_REPOSITORY_START';
-// export const FETCH_REPOSITORY_SUCCESS = '@@explorer/FETCH_REPOSITORY_SUCCESS';
-// export const FETCH_REPOSITORY_FAILURE = '@@explorer/FETCH_REPOSITORY_FAILURE';
-
 export interface FetchRepositoryStartAction extends Action {
   type: typeof ExplorerActionTypes.FETCH_REPOSITORY_START;
   payload: string;
@@ -49,9 +56,6 @@ export interface FetchRepositoryFailureAction extends Action {
 }
 
 // Add Repository
-// export const ADD_REPOSITORY = '@@explorer/ADD_REPOSITORY';
-// export const ADD_REPOSITORY_FAILURE = '@@explorer/ADD_REPOSITORY_FAILURE';
-
 export interface AddRepositoryAction extends Action {
   type: typeof ExplorerActionTypes.ADD_REPOSITORY;
   payload: Repository;
@@ -62,7 +66,13 @@ export interface AddRepositoryFailureAction extends Action {
   payload: string;
 }
 
-// All Actions Types
+// Remove Repository
+export interface RemoveRepositoryAction extends Action {
+  type: typeof ExplorerActionTypes.REMOVE_REPOSITORY;
+  payload: number;
+}
+
+// All Actions
 export type ExplorerActions =
   | FetchRepositoryStartAction
   | FetchRepositorySuccessAction
