@@ -29,6 +29,8 @@
     "prettier"
   ],
   "rules": {
+    "no-plusplus": "off",
+    "no-shadow": "warn",
     "camelcase": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",

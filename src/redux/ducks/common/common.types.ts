@@ -1,4 +1,13 @@
 // Common data types
+export interface Issue {
+  id: number;
+  title: string;
+  html_url: string;
+  user: {
+    login: string;
+  };
+}
+
 export interface Repository {
   id: number;
   full_name: string;
@@ -11,4 +20,5 @@ export interface Repository {
   stargazers_count: number;
   forks_count: number;
   open_issues_count: number;
+  issues: Issue[];
 }

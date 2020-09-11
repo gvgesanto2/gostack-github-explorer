@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios';
 import api from '../../../services/api';
 
 // Import common data types
-import { Repository } from '../common/common.types';
+import { Repository, Issue } from '../common/common.types';
 
 import {
   fetchRepositorySuccess,
@@ -34,11 +34,64 @@ export function* fetchRepositoryAsync({
       return;
     }
 
-    const response: AxiosResponse<Repository> | any = yield api.get<Repository>(
-      `repos/${payload}`,
-    );
+    const [repositoryRes, issuesRes]:
+      | AxiosResponse<Repository>
+      | any = yield Promise.all([
+        api.get<Repository>(`repos/${payload}`),
+        api.get<Issue[]>(`repos/${payload}/issues`),
+      ]);
 
-    const repository = response.data;
+    const issues = issuesRes.data;
+    const {
+      id,
+      full_name,
+      description,
+      owner: { login, avatar_url },
+      watchers_count,
+      stargazers_count,
+      forks_count,
+      open_issues_count,
+    } = repositoryRes.data;
+
+    const repository: Repository = {
+      id,
+      full_name,
+      description,
+      owner: { login, avatar_url },
+      watchers_count,
+      stargazers_count,
+      forks_count,
+      open_issues_count,
+      issues: [],
+    };
+
+    // id: number;
+    // title: string;
+    // html_url: string;
+    // user: {
+    //   login: string;
+    // };
+
+    for (let i = 0; i < 10; i++) {
+      if (i >= repository.open_issues_count) {
+        break;
+      } else {
+        const {
+          id,
+          title,
+          html_url,
+          user: { login },
+        } = issues[i];
+        repository.issues.push({
+          id,
+          title,
+          html_url,
+          user: { login },
+        });
+      }
+    }
+
+    console.log('@@SAGA - repository: ', repository);
 
     yield put(fetchRepositorySuccess(repository));
   } catch (error) {

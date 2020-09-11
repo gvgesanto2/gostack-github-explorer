@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiEye, FiAlertCircle, FiChevronRight } from 'react-icons/fi';
+import { FiEye, FiAlertCircle } from 'react-icons/fi';
 import { ImStarEmpty } from 'react-icons/im';
 import { BiGitRepoForked } from 'react-icons/bi';
 
@@ -8,11 +7,11 @@ import {
   RepositoryInfo,
   RepositoryInfoHeader,
   RepositoryInfoList,
-  IssueList,
-  Issue,
 } from './repository-details.styles';
 
 import { Repository } from '../../../redux/ducks/common/common.types';
+
+import IssueList from '../../components/issue-list/issue-list.component';
 
 interface RepositoryDetailsProps {
   repository?: Repository;
@@ -29,6 +28,7 @@ const RepositoryDefault = {
   stargazers_count: 0,
   forks_count: 0,
   open_issues_count: 0,
+  issues: [],
 };
 
 const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
@@ -42,6 +42,7 @@ const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
     stargazers_count,
     forks_count,
     open_issues_count,
+    issues,
   } = repository;
 
   console.log('@@RepositoryDetails/rendered');
@@ -50,9 +51,13 @@ const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
     <>
       <RepositoryInfo className="mb-xlg">
         <RepositoryInfoHeader>
-          <img src={avatar_url} alt="{login}" />
+          <img src={avatar_url} alt={login} />
           <div>
-            <a href={`https://github.com/${full_name}`} target="_blank">
+            <a
+              href={`https://github.com/${full_name}`}
+              target="_blank"
+              rel="noreferrer"
+            >
               <strong>{full_name}</strong>
               <p>{description}</p>
             </a>
@@ -90,29 +95,7 @@ const RepositoryDetails: React.FC<RepositoryDetailsProps> = ({
         </RepositoryInfoList>
       </RepositoryInfo>
 
-      <IssueList>
-        <Issue>
-          <Link to="/repositories/">
-            <div>
-              <strong>title</strong>
-              <p>description</p>
-            </div>
-
-            <FiChevronRight size={20} />
-          </Link>
-        </Issue>
-
-        <Issue>
-          <Link to="/repositories/">
-            <div>
-              <strong>title</strong>
-              <p>description</p>
-            </div>
-
-            <FiChevronRight size={20} />
-          </Link>
-        </Issue>
-      </IssueList>
+      <IssueList issues={issues} />
     </>
   );
 };
